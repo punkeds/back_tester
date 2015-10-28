@@ -15,12 +15,11 @@ class SignalEvent():
 
     def __init__(self, symbol, datetime, signal_type):
 
-        ''' Инициализирует SignalEvent.
+        #Инициализирует SignalEvent.
 
-        Параметры:
-        symbol - Символ тикера, например для Google — 'GOOG'.
-        datetime - временная метка момента генерации сигнала.
-        signal_type - 'LONG' или 'SHORT' '''
+        #symbol - Символ тикера, например для Google — 'GOOG'.
+        #datetime - временная метка момента генерации сигнала.
+        #signal_type - 'LONG' или 'SHORT' '''
 
         self.type = 'SIGNAL'
         self.symbol = symbol
