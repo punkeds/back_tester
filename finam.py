@@ -18,10 +18,12 @@ def get_date_from_to(st_date, end_date):
 
    return from_dt + to_dt
 
-start_date = datetime.date(2015, 7, 1)
-end_date = datetime.date(2015, 9, 30)
-instrument_code = 'SPFB.Si-9.15'
-instrument_id = 74337
+start_date = datetime.date(2014, 3, 17)
+end_date = datetime.date(2014, 6, 15)
+instrument_code = 'SPFB.RTS-6.14'
+instrument_id = 82553
+
+
 
 
 def load_from_finam(instrument_id, instrument_code, start_date, end_date):
@@ -51,3 +53,6 @@ def load_from_finam(instrument_id, instrument_code, start_date, end_date):
 
         report_st_iterate_date += week_plus_one
         time.sleep(5)
+
+
+load_from_finam(instrument_id, instrument_code, start_date, end_date)

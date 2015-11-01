@@ -1,6 +1,6 @@
 import os
 import mysql.connector as MySQL
-import xlrd
+import csv
 
 connection = MySQL.connect(host='localhost', database='exchange', user='root', password='mysql')
 cursor = connection.cursor()
@@ -8,8 +8,7 @@ folder = 'data/'
 upload_files = os.listdir(folder)
 
 
-
-query = "INSERT INTO `Si` "\
+query = "INSERT INTO `Ri` "\
         "(`ticker`, `per`, `date`, `time`, `open`, `high`, `low`, `close`, `vol`)"\
         " VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
@@ -17,22 +16,19 @@ file_count = 1
 
 for up_file in upload_files:
     print file_count
-    rb = xlrd.open_workbook(folder+up_file)
-    sheet = rb.sheet_by_index(0)
+    file_input = open(folder+up_file,'r')
+    rb = csv.reader(file_input, delimiter = ',')
     start = True
-    for rownum in range(sheet.nrows):
-        if not start and (sheet.row_values(rownum)[0] == "AR" or sheet.row_values(rownum)[0] == "ARM"):
-            row = sheet.row_values(rownum)
-            inp_row = tuple(row)
-            print inp_row
-            #cursor.execute(query, inp_row)
-
-            #connection.commit()
+    for rownum in rb:
+        if not start:
+            rownum[2] = rownum[2][0:4]+'-'+rownum[2][4:6]+'-'+rownum[2][6:8]
+            rownum[3] = rownum[3][0:2]+':'+rownum[3][2:4]+':'+rownum[3][4:6]
+            cursor.execute(query, rownum)
+            connection.commit()
         else:
             start = False
 
     file_count += 1
-
 cursor.close()
 connection.close()
 
