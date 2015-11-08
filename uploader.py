@@ -8,7 +8,7 @@ folder = 'data/'
 upload_files = os.listdir(folder)
 
 
-query = "INSERT INTO `Ri` "\
+query = "INSERT INTO `Si` "\
         "(`ticker`, `per`, `date`, `time`, `open`, `high`, `low`, `close`, `vol`)"\
         " VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
